@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import type { ApiResponse } from '../types/Api';
 import type { LoginResponse } from '../types/LoginResponse';
+import { useAuth } from '../context/AuthContext';
 
-// Fix CSS with 
+// Fix CSS with password/email input
+// Do I need the set username and id stuff?
 
 export default function LoginPage() {
 
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     //Hold the form input values
     const [email, setEmail] = useState<string>('');
@@ -32,8 +35,8 @@ export default function LoginPage() {
             if (response.success) {
                 const { token, name, id } = response.data;
                 localStorage.setItem("token", token);
-                localStorage.setItem("user_name", name);
-                localStorage.setItem("user_id", id);
+
+                login({ name, id });
 
                 navigate(`/post/dashboard/${id}`);
             } else {
@@ -48,30 +51,34 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="text-center vh-100">
-            <form onSubmit={handleSubmit}>
+        <div>
 
-                <h2 className="font-semibold mb-6 mt-6 pt-5 pb-3 text-center">Login</h2>
+            <div className="text-center vh-100">
+                <form onSubmit={handleSubmit}>
 
-                {error && <Alert variant="danger" className="text-center p-3">{error}</Alert>}
+                    <h2 className="font-semibold mb-6 mt-6 pt-5 pb-3 text-center">Login</h2>
 
-                <div className="mb-4">
-                    <label className="p-3">Email</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
-                        className="input-field-login" />
-                </div>
+                    {error && <Alert variant="danger" className="text-center p-3">{error}</Alert>}
 
-                <div className="mb-3 p-2">
-                    <label className="p-2">Password</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required
-                        className="input-field-login" />
-                </div>
+                    <div className="mb-4">
+                        <label className="p-3">Email</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
+                            className="input-field-login" />
+                    </div>
 
-                <button type="submit" disabled={loading} className="btn bg-primary my-3">
-                    {loading ? "Logging in..." : "Login"}
-                </button>
-            </form>
+                    <div className="mb-3 p-2">
+                        <label className="p-2">Password</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required
+                            className="input-field-login" />
+                    </div>
+
+                    <button type="submit" disabled={loading} className="btn bg-primary my-3">
+                        {loading ? "Logging in..." : "Login"}
+                    </button>
+                </form>
+            </div>
         </div>
+
     );
 
 }

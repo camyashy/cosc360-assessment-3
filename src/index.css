@@ -58,8 +58,8 @@ button:focus-visible {
 }
 
 .navbar-padding {
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
 .footer-fs {
@@ -67,8 +67,8 @@ button:focus-visible {
 }
 
 .post-padding {
-  padding-left: 250px;
-  padding-right: 250px;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 .input-field-login {

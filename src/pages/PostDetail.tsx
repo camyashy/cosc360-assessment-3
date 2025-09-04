@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
 
+// Add post creator username
+
 export default function PostDetail() {
 
     // Get the id from the URL
@@ -42,7 +44,7 @@ export default function PostDetail() {
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
-                <Spinner animation="border" variant="primary" />;
+                <Spinner animation="border" variant="primary" />
                 <h2>Loading post...</h2>
             </div>
         );

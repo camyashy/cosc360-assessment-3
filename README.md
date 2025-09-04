@@ -9,17 +9,32 @@ https://github.com/camyashy/cosc360-assessment-3
 - Log in? I don't understand [localStorage]
 
 # To-do
+
+- Integrate Catgeories
+- Component keys???
+
 - Navbar
 -- Update Dropdown login/logout
--- Add conditional. If not logged in only show All posts and log in option
 -- If logged in show username and Dashboard option
 -- Update navigation links
+-- Update logout
 
 - PostLists
 -- Create button only appears if logged in
--- Edit and delete buttons only appear if logged in
---- If admin, edit and delete buttons for all posts
---- If user, edit and delete buttons only for the posts you created
+
+- PostDetails
+-- Need to get the name of the user from the database. Post only has User_Id
 
 - Login
 -- Update CSS with Password and Email bar align
+-- Check login example notepad in COSC360 folder
+
+- Components
+-- Change to arrow functions
+
+- AuthContext
+-- Send api logout request on logout
+-- Set redirect on logout
+
+- PostTable
+-- Paginate???

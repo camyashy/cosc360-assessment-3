@@ -1,27 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Spinner, Alert } from 'react-bootstrap';
+import { Spinner, Alert, Container } from 'react-bootstrap';
 import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
 import PostTable from '../components/PostTable';
+import { useParams, Link } from 'react-router-dom';
 
 // How do you paginate???
 
 export default function PostList() {
 
+    // Get the id from the URL if applicable
+    const { id } = useParams<{ id: string }>() || null;
+
+    const title = id ? "Your Posts" : "All Posts";
+
     // Set up state to store post, loading status and any errors
-    const [posts, setPosts] = useState<Post[] | null>(null);
+    const [posts, setPosts] = useState<Post[] | []>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     // Check if the user is logged in
-    const loggedIn: boolean = !!localStorage.getItem('token');
-    let loggedInUserID: number | null = null;
-    let loggedInUserName: string | null = null;
+    const loggedInUserID = localStorage.getItem('user_id') || null;
+    const loggedInUserName = localStorage.getItem('user_name') || "";
 
-    if (loggedIn) {
-        //loggedInUserID = localStorage.getItem('user_id');
-        loggedInUserName = localStorage.getItem('user_name');
-    }
 
     // Fetch the data when the component mounts
     useEffect(() => {
@@ -34,7 +35,17 @@ export default function PostList() {
                 // Call the API to obtain a list of all posts
                 const postData = await PostsAPI.list();
 
-                setPosts(postData);
+                // If we have an id in the URL (aka are looking just at the user's posts)
+                // filter so that only posts created by that user are in the list
+                if (id) {
+                    const tablePosts = postData.filter(post => String(post.user_id) === loggedInUserID);
+                    setPosts(tablePosts);
+
+                } else {
+                    setPosts(postData);
+                }
+
+
             } catch (err: any) {
                 setError(err.message || "Failed to fetch post");
             } finally {
@@ -43,12 +54,12 @@ export default function PostList() {
         };
 
         fetchPosts();
-    }, []); // Runs once on mount
+    }, [id]); // Runs the effect when the page changes
 
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
-                <Spinner animation="border" variant="primary" />;
+                <Spinner animation="border" variant="primary" />
                 <h2>Loading post...</h2>
             </div>
         );
@@ -59,14 +70,12 @@ export default function PostList() {
     }
 
     return (
-        <div>
-            <div>
-                <h1>Posts</h1>
-            </div>
-            <PostTable posts={posts} user_id={loggedInUserID} />
+        <div className="post-padding">
+            <Container fluid className="d-flex align-items-center justify-content-between p-3">
+                <h1 className="mb-0">{title}</h1>
+                {loggedInUserID && <Link to={`/post/create`} className="btn btn-primary">+ Create New Post</Link>}
+            </Container>
+            <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} />
         </div>
-
-
-
     );
 };
