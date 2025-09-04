@@ -1,6 +1,7 @@
-export interface PostProps {
+export interface Post {
     id: number;
     title: string;
-    text?: string;
+    content?: string;
+    user_id: number,
     created_at: Date;
 }

@@ -66,6 +66,16 @@ button:focus-visible {
   font-size: 0.8rem;
 }
 
+.post-padding {
+  padding-left: 250px;
+  padding-right: 250px;
+}
+
+.input-field-login {
+  width: 30%;
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

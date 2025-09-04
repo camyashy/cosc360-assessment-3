@@ -6,26 +6,24 @@ import { Link } from 'react-router-dom'
 // "User Name" click on dropdown logout
 // If not logged in only "view" action
 
-// Look at mobile view and centring
+// Dashboard option only appears when logged in
 
 export default function NavBar() {
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
             <Container fluid className="navbar-padding">
                 {/* Brand/Logo - links to homepage */}
                 <Navbar.Brand as={Link} to="/">Assignment 3 COSC360</Navbar.Brand>
 
-                {/* Hamburger Menu Toggle for mobile */}
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
                 {/* Collapsible content */}
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ms-auto"> {/* ms-auto pushes links to the right */}
+                    <Nav className="ms-auto">
                         {/* Navigation Links */}
-                        <Nav.Link as={Link} to="/">Dashboard</Nav.Link>
-                        <Nav.Link as={Link} to="/all">Posts</Nav.Link>
-                        <NavDropdown title="Admin User" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/">Logout</NavDropdown.Item>
+                        <Nav.Link as={Link} to="/user/:id">Dashboard</Nav.Link>
+                        <Nav.Link as={Link} to="/">All Posts</Nav.Link>
+                        <NavDropdown title="Not Logged In" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/login">Log In</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
