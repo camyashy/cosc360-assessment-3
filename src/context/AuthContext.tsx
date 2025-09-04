@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { User } from '../types/User';
 import type { AuthContextType } from '../types/AuthContextType';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+//const navigate = useNavigate();
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -27,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.removeItem("user_id");
         localStorage.removeItem("token");
         setUser(null);
-        // Set redirect???
+        //navigate(`/`);
         // Send to server
     };
 

@@ -3,11 +3,13 @@ import Layout from './components/Layout';
 import PostDetail from "./pages/PostDetail";
 import LogIn from "./pages/LogIn";
 import PostList from './pages/PostList';
+import UpdatePost from './pages/UpdatePost';
+import CreatePost from './pages/CreatePost';
 import { AuthProvider } from './context/AuthContext';
 
 
 export default function App() {
-
+  // Do I need to add route validation here?
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -19,6 +21,8 @@ export default function App() {
             <Route path="/post/:id" element={<PostDetail />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/user/:id" element={<PostList />} />
+            <Route path="/post/edit/:id" element={<UpdatePost />} />
+            <Route path="/post/create" element={<CreatePost />} />
           </Route>
         </Routes>
       </BrowserRouter>

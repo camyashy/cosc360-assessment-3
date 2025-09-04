@@ -47,7 +47,7 @@ export default function PostList() {
 
 
             } catch (err: any) {
-                setError(err.message || "Failed to fetch post");
+                setError(err.message || "Failed to fetch posts");
             } finally {
                 setLoading(false);
             }
@@ -60,7 +60,7 @@ export default function PostList() {
         return (
             <div className="text-center p-3 mb-2">
                 <Spinner animation="border" variant="primary" />
-                <h2>Loading post...</h2>
+                <h2>Loading posts...</h2>
             </div>
         );
     }
@@ -71,8 +71,8 @@ export default function PostList() {
 
     return (
         <div className="post-padding">
-            <Container fluid className="d-flex align-items-center justify-content-between p-3">
-                <h1 className="mb-0">{title}</h1>
+            <Container fluid className="d-flex align-items-center justify-content-between py-3">
+                <h2 className="mb-0">{title}</h2>
                 {loggedInUserID && <Link to={`/post/create`} className="btn btn-primary">+ Create New Post</Link>}
             </Container>
             <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} />

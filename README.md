@@ -14,16 +14,11 @@ https://github.com/camyashy/cosc360-assessment-3
 - Component keys???
 
 - Navbar
--- Update Dropdown login/logout
--- If logged in show username and Dashboard option
--- Update navigation links
 -- Update logout
-
-- PostLists
--- Create button only appears if logged in
 
 - PostDetails
 -- Need to get the name of the user from the database. Post only has User_Id
+-- Category
 
 - Login
 -- Update CSS with Password and Email bar align
@@ -38,3 +33,15 @@ https://github.com/camyashy/cosc360-assessment-3
 
 - PostTable
 -- Paginate???
+-- Category
+
+- PostForm
+-- Form validation (display)
+-- Display success
+-- Categories
+
+- Delete
+-- Display success
+
+- App
+-- route validation?

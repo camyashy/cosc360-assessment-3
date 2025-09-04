@@ -45,7 +45,7 @@ export default function PostDetail() {
         return (
             <div className="text-center p-3 mb-2">
                 <Spinner animation="border" variant="primary" />
-                <h2>Loading post...</h2>
+                <h2>Loading posts...</h2>
             </div>
         );
     }

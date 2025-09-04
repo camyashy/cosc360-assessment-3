@@ -15,12 +15,12 @@ export const PostsAPI = {
     },
 
     create: async (data: Pick<Post, "title" | "content">): Promise<Post> => {
-        const response: ApiResponse<Post> = await api.post('/post', data);
+        const response: ApiResponse<Post> = await api.post('/post/create', data);
         return response.data;
     },
 
     update: async (id: number, data: Pick<Post, "title" | "content">): Promise<Post> => {
-        const response: ApiResponse<Post> = await api.post(`/post/${id}`, data);
+        const response: ApiResponse<Post> = await api.put(`/post/edit/${id}`, data);
         return response.data;
     },
 
