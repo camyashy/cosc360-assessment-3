@@ -20,6 +20,7 @@ export default function Table({ posts, user_id, user_name }: TableProps) {
                     <th>#</th>
                     <th>Title</th>
                     <th>Content</th>
+                    <th>Category</th>
                     <th style={{ width: '120px' }}>Created At</th>
                     <th style={{ width: '180px' }}>Actions</th>
                 </tr>
@@ -33,6 +34,7 @@ export default function Table({ posts, user_id, user_name }: TableProps) {
                             <td className="text-center align-middle">{post.id}</td>
                             <td className="align-middle">{post.title}</td>
                             <td>{truncate(post.content, 100)}</td>
+                            <td className="text-center align-middle">{post.category.category_name}</td>
                             <td className="text-center align-middle"> {new Date(post.created_at).toLocaleDateString()} </td>
                             <td className="align-middle text-center">
                                 <Link to={`/post/${post.id}`} className="btn btn-success btn-sm me-1">View</Link>

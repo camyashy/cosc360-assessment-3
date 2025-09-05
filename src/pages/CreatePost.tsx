@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PostForm from '../components/PostForm';
 import { Alert } from 'react-bootstrap';
 
+// Do we need the error here?
+
 export default function CreatePost() {
 
     const formName = "Create Post";

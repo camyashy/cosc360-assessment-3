@@ -12,16 +12,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Initialize user from localStorage on mount
     useEffect(() => {
-        const name = localStorage.getItem("user_name");
-        const id = localStorage.getItem("user_id");
-        if (name && id) {
-            setUser({ name, id });
+        const user_name = localStorage.getItem("user_name");
+        const user_id = localStorage.getItem("user_id");
+        if (user_name && user_id) {
+            setUser({ user_name, user_id });
         }
     }, []);
 
     const login = (newUser: User) => {
-        localStorage.setItem("user_name", newUser.name ?? "");
-        localStorage.setItem("user_id", newUser.id ?? "");
+        localStorage.setItem("user_name", newUser.user_name ?? "");
+        localStorage.setItem("user_id", newUser.user_id ?? "");
         setUser(newUser);
     };
 
@@ -42,5 +42,3 @@ export const useAuth = () => {
     if (!context) throw new Error("useAuth must be used within AuthProvider");
     return context;
 };
-
-// How would I use login and logout???

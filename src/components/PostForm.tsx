@@ -31,14 +31,17 @@ export default function PostForm({ buttonText, postData }: FormProps) {
 
         try {
             let response: Post;
+            let success: string;
 
             if (!postData) {
                 response = await PostsAPI.create({ title, content });
+                success = "Post created successfully!";
             } else {
                 response = await PostsAPI.update(postData.id, { title, content });
+                success = "Post updated successfully!"
             }
 
-            navigate("/");
+            navigate("/", { state: { successMessage: success } });
         } catch (err: any) {
             setError(err.message || "Unable to save post");
         } finally {

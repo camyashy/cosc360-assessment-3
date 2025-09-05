@@ -62,9 +62,10 @@ export default function PostDetail() {
         <div>
             <div className="bg-primary text-white p-3 mb-2">
                 <h1 className="mt-4 mb-4 text-center">{post.title}</h1>
-                <h4 className="text-center mb-4 fst-italic">By !ADD User Name Here!</h4>
+                {post.user && <p className="mb-3 text-center fst-italic">By {post.user.user_name}</p>}
             </div>
-            <div className="post-padding mt-4 mb-4">
+            <div className="post-padding mt-3 mt-4">
+                <h2 className="mb-3">Category: {post.category.category_name}</h2>
                 <p className="text-justify">{post.content}</p>
                 <small className="text-center">Created {new Date(post.created_at).toLocaleDateString()}</small>
             </div>

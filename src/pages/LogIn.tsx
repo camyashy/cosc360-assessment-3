@@ -36,7 +36,7 @@ export default function LoginPage() {
                 const { token, name, id } = response.data;
                 localStorage.setItem("token", token);
 
-                login({ name, id });
+                login({ user_name: name, user_id: id });
 
                 navigate(`/post/dashboard/${id}`);
             } else {

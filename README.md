@@ -10,15 +10,15 @@ https://github.com/camyashy/cosc360-assessment-3
 
 # To-do
 
-- Integrate Catgeories
 - Component keys???
+- Commenting
+- Fallback route
 
 - Navbar
 -- Update logout
 
 - PostDetails
--- Need to get the name of the user from the database. Post only has User_Id
--- Category
+-- CSS?
 
 - Login
 -- Update CSS with Password and Email bar align
@@ -33,15 +33,16 @@ https://github.com/camyashy/cosc360-assessment-3
 
 - PostTable
 -- Paginate???
--- Category
 
 - PostForm
 -- Form validation (display)
--- Display success
 -- Categories
 
 - Delete
 -- Display success
 
 - App
--- route validation?
+-- route validation based on user and authorisation to access?
+
+- Create Post
+-- error

@@ -3,7 +3,7 @@ import { Spinner, Alert, Container } from 'react-bootstrap';
 import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
 import PostTable from '../components/PostTable';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 
 // How do you paginate???
 
@@ -13,6 +13,10 @@ export default function PostList() {
     const { id } = useParams<{ id: string }>() || null;
 
     const title = id ? "Your Posts" : "All Posts";
+
+    // Get any success messages from previous actions
+    const location = useLocation()
+    const successMessage = location.state?.successMessage;
 
     // Set up state to store post, loading status and any errors
     const [posts, setPosts] = useState<Post[] | []>([]);
@@ -70,12 +74,18 @@ export default function PostList() {
     }
 
     return (
-        <div className="post-padding">
-            <Container fluid className="d-flex align-items-center justify-content-between py-3">
-                <h2 className="mb-0">{title}</h2>
-                {loggedInUserID && <Link to={`/post/create`} className="btn btn-primary">+ Create New Post</Link>}
-            </Container>
-            <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} />
+        <div>
+            {successMessage &&
+                <Alert variant="success" className="text-center p-3">{successMessage}</Alert>}
+
+            <div className="post-padding">
+                <Container fluid className="d-flex align-items-center justify-content-between py-3">
+                    <h2 className="mb-0">{title}</h2>
+                    {loggedInUserID && <Link to={`/post/create`} className="btn btn-primary">+ Create New Post</Link>}
+                </Container>
+                <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} />
+            </div>
         </div>
+
     );
 };
