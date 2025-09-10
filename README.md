@@ -31,11 +31,7 @@ https://github.com/camyashy/cosc360-assessment-3
 -- Send api logout request on logout
 -- Set redirect on logout
 
-- PostTable
--- Paginate???
-
 - PostForm
--- Form validation (display)
 -- Categories
 
 - Delete
@@ -43,6 +39,3 @@ https://github.com/camyashy/cosc360-assessment-3
 
 - App
 -- route validation based on user and authorisation to access?
-
-- Create Post
--- error

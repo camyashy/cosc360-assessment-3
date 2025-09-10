@@ -38,7 +38,7 @@ export default function LoginPage() {
 
                 login({ user_name: name, user_id: id });
 
-                navigate(`/post/dashboard/${id}`);
+                navigate(`/user/${id}`);
             } else {
                 throw new Error(response.message);
             }

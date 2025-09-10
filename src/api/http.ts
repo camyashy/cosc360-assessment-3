@@ -52,20 +52,3 @@ export const api = {
     put: (endpoint: string, body: any) => apiClient(endpoint, "PUT", body),
     delete: (endpoint: string) => apiClient(endpoint, "DELETE"),
 };
-
-/*
-function HomePage() {
-  const handleFetchUser = async () => {
-    try {
-      // It's now this simple to make an authenticated GET request!
-      const userData = await api.get('/user');
-      console.log(userData);
-    } catch (error) {
-      // If the API call fails, the error will be caught here.
-      alert("Failed to fetch user data.");
-    }
-  };
-
-  // ... rest of your component
-}
-*/

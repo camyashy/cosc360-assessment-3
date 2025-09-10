@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { User } from '../types/User';
 import type { AuthContextType } from '../types/AuthContextType';
-import { useNavigate } from 'react-router-dom';
+import { api } from '../api/http';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-//const navigate = useNavigate();
+
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -25,13 +25,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(newUser);
     };
 
-    const logout = () => {
-        localStorage.removeItem("user_name");
-        localStorage.removeItem("user_id");
-        localStorage.removeItem("token");
-        setUser(null);
-        //navigate(`/`);
-        // Send to server
+    const logout = async () => {
+
+        try {
+            //await api.post("/logout", {});
+
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("token");
+            setUser(null);
+        } catch (error) {
+            console.error("Logout failed", error);
+        }
+
     };
 
     return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;

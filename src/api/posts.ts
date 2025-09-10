@@ -24,8 +24,8 @@ export const PostsAPI = {
         return response.data;
     },
 
-    remove: async (id: number): Promise<void> => {
-        await api.delete(`/post/${id}`);
+    remove: async (id: number): Promise<ApiResponse<string>> => {
+        return await api.delete(`/post/delete/${id}`);
     }
 
 };

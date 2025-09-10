@@ -4,19 +4,19 @@ import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
 import PostTable from '../components/PostTable';
 import { useParams, Link, useLocation } from 'react-router-dom';
-
-// How do you paginate???
+import type { ApiResponse } from '../types/Api';
 
 export default function PostList() {
 
     // Get the id from the URL if applicable
     const { id } = useParams<{ id: string }>() || null;
 
+    // Determine what the heading of the page will be based upon page
     const title = id ? "Your Posts" : "All Posts";
 
     // Get any success messages from previous actions
     const location = useLocation()
-    const successMessage = location.state?.successMessage;
+    const [successMessage, setSuccessMessage] = useState<string | null>(location.state?.successMessage);
 
     // Set up state to store post, loading status and any errors
     const [posts, setPosts] = useState<Post[] | []>([]);
@@ -26,7 +26,6 @@ export default function PostList() {
     // Check if the user is logged in
     const loggedInUserID = localStorage.getItem('user_id') || null;
     const loggedInUserName = localStorage.getItem('user_name') || "";
-
 
     // Fetch the data when the component mounts
     useEffect(() => {
@@ -58,8 +57,34 @@ export default function PostList() {
         };
 
         fetchPosts();
-    }, [id]); // Runs the effect when the page changes
+    }, [id, loggedInUserID]); // Runs the effect when the page changes
 
+    // Handle the action when the delete button is pressed
+    const handleDelete = async (postId: number) => {
+
+        setError(null);
+
+        try {
+            // Send delete request to the server
+            const response: ApiResponse<string> = await PostsAPI.remove(postId);
+
+            // Assign success message
+            if (response.success) {
+                setSuccessMessage("Post deleted successfully");
+            }
+
+            // Update posts displayed on page without doing a new server request
+            setPosts(prevPosts => prevPosts.filter(post => post.id !== postId))
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // What to do with errors
+        } catch (err: any) {
+            setError(err.message || "Delete Failed");
+        }
+    };
+
+    // While we are awaiting post retrieval from server
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
@@ -69,21 +94,19 @@ export default function PostList() {
         );
     }
 
-    if (error) {
-        return <Alert variant="danger" className="text-center p-3">Error: {error}</Alert>;
-    }
-
     return (
         <div>
             {successMessage &&
                 <Alert variant="success" className="text-center p-3">{successMessage}</Alert>}
+
+            {error && <Alert variant="danger" className="text-center p-3">Error: {error}</Alert>}
 
             <div className="post-padding">
                 <Container fluid className="d-flex align-items-center justify-content-between py-3">
                     <h2 className="mb-0">{title}</h2>
                     {loggedInUserID && <Link to={`/post/create`} className="btn btn-primary">+ Create New Post</Link>}
                 </Container>
-                <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} />
+                <PostTable posts={posts} user_id={loggedInUserID} user_name={loggedInUserName} onDelete={handleDelete} />
             </div>
         </div>
 
