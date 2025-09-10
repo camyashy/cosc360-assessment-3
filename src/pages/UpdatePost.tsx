@@ -15,8 +15,8 @@ export default function UpdatePost() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    if (id) {
-        useEffect(() => {
+    useEffect(() => {
+        if (id) {
             const fetchPost = async () => {
 
                 setLoading(true);
@@ -34,8 +34,8 @@ export default function UpdatePost() {
             };
 
             fetchPost();
-        }, [id]);
-    }
+        }
+    }, [id]);
 
     if (loading) {
         return (

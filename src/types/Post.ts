@@ -10,4 +10,5 @@ export interface Post {
 
     user?: User;
     category: Category;
+    category_id?: string;
 }
