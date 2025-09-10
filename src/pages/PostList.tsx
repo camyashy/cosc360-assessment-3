@@ -27,6 +27,19 @@ export default function PostList() {
     const loggedInUserID = localStorage.getItem('user_id') || null;
     const loggedInUserName = localStorage.getItem('user_name') || "";
 
+
+    // If we are on the page of user's posts, if the user is either not logged in
+    // Or a different user, they are not allowed to access
+
+    if (id) {
+        if (id != loggedInUserID) {
+            return (
+                <Alert variant="danger" className="text-center p-3">You are not authorised to view this page</Alert>
+            )
+        }
+    }
+
+
     // Fetch the data when the component mounts
     useEffect(() => {
         const fetchPosts = async () => {

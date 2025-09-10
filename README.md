@@ -2,7 +2,7 @@ https://github.com/camyashy/cosc360-assessment-3
 
 # Approach
 
-
+Route validation through appearance of buttons/ability to click as well as validation statements
 
 # Challenges
 
@@ -30,12 +30,6 @@ https://github.com/camyashy/cosc360-assessment-3
 - AuthContext
 -- Send api logout request on logout
 -- Set redirect on logout
-
-- PostForm
--- Categories
-
-- Delete
--- Display success
 
 - App
 -- route validation based on user and authorisation to access?
