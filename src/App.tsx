@@ -5,6 +5,7 @@ import LogIn from "./pages/LogIn";
 import PostList from './pages/PostList';
 import UpdatePost from './pages/UpdatePost';
 import CreatePost from './pages/CreatePost';
+import NotFoundPage from './pages/NotFoundPage';
 import { AuthProvider } from './context/AuthContext';
 
 
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/user/:id" element={<PostList />} />
             <Route path="/post/edit/:id" element={<UpdatePost />} />
             <Route path="/post/create" element={<CreatePost />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
