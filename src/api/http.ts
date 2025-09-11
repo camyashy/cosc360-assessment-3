@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.PROD ? import.meta.env.VITE_API_URL : '';
+//const API_URL = import.meta.env.PROD ? import.meta.env.VITE_API_URL : '';
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 function getToken(): string | null {
     return localStorage.getItem("token");
@@ -30,6 +31,7 @@ async function apiClient(endpoint: string, method: string, body?: any): Promise<
     }
 
     try {
+        console.log('Fetching:', `${API_URL}${endpoint}`);
         const response = await fetch(`${API_URL}${endpoint}`, options);
 
         if (!response.ok) {

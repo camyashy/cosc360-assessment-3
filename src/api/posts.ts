@@ -5,7 +5,7 @@ import type { ApiResponse } from "../types/Api";
 export const PostsAPI = {
 
     list: async (): Promise<Post[]> => {
-        const response: ApiResponse<Post[]> = await api.get('');
+        const response: ApiResponse<Post[]> = await api.get('/');
         return response.data;
     },
 
