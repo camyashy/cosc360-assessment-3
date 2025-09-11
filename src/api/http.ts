@@ -1,5 +1,6 @@
 //const API_URL = import.meta.env.PROD ? import.meta.env.VITE_API_URL : '';
 const API_URL = import.meta.env.VITE_API_URL || '/api';
+console.log(API_URL);
 
 function getToken(): string | null {
     return localStorage.getItem("token");
