@@ -50,13 +50,18 @@ export default function Table({ posts, user_id, user_name, onDelete }: TableProp
 
                                     <Link to={`/post/${post.id}`} className="btn btn-success btn-sm me-1">View</Link>
 
-                                    <span title={!canEditDelete ? "You are not authorised to edit this post" : ""}>
-                                        <button disabled={!canEditDelete} onClick={() => navigate(`/post/edit/${post.id}`)} className="btn btn-primary btn-sm me-1">Edit</button>
-                                    </span>
+                                    {user_id &&
+                                        <>
+                                            <span title={!canEditDelete ? "You are not authorised to edit this post" : ""}>
+                                                <button disabled={!canEditDelete} onClick={() => navigate(`/post/edit/${post.id}`)} className="btn btn-primary btn-sm me-1">Edit</button>
+                                            </span>
 
-                                    <span title={!canEditDelete ? "You are not authorised to delete this post" : ""}>
-                                        <button disabled={!canEditDelete} onClick={(e) => handleDelete(post.id, e)} className="btn btn-danger btn-sm me-1">Delete</button>
-                                    </span>
+                                            <span title={!canEditDelete ? "You are not authorised to delete this post" : ""}>
+                                                <button disabled={!canEditDelete} onClick={(e) => handleDelete(post.id, e)} className="btn btn-danger btn-sm me-1">Delete</button>
+                                            </span>
+                                        </>
+                                    }
+
                                 </td>
                             </tr>
                         );

@@ -41,14 +41,6 @@ export default function UpdatePost() {
         }
     }, [id]);
 
-    // If the user trying to edit the post isn't either the user who created it
-    // Or the admin user, then they are not allowed access
-    if ((loggedInUserID != post?.user_id) || loggedInUserName != "Admin User") {
-        return (
-            <Alert variant="danger" className="text-center p-3">You are not authorised to view this page</Alert>
-        )
-    }
-
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
@@ -56,6 +48,14 @@ export default function UpdatePost() {
                 <h2>Loading post...</h2>
             </div>
         );
+    }
+
+    // If the user trying to edit the post isn't either the user who created it
+    // Or the admin user, then they are not allowed access
+    if ((loggedInUserID != post?.user_id) && loggedInUserName != "Admin User") {
+        return (
+            <Alert variant="danger" className="text-center p-3">You are not authorised to view this page</Alert>
+        )
     }
 
     if (error) {

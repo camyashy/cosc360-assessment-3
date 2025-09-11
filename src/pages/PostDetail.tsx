@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Spinner, Alert } from 'react-bootstrap';
+import { Spinner, Alert, Stack, Badge } from 'react-bootstrap';
+import { PersonCircle, CalendarEvent, Folder2 } from 'react-bootstrap-icons';
 import { useParams } from 'react-router-dom';
 import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
-
-// Add post creator username
 
 export default function PostDetail() {
 
@@ -60,14 +59,26 @@ export default function PostDetail() {
 
     return (
         <div>
-            <div className="bg-primary text-white p-3 mb-2">
+            <div className="bg-light text-secondary p-3 mb-2">
                 <h1 className="mt-4 mb-4 text-center">{post.title}</h1>
-                {post.user && <p className="mb-3 text-center fst-italic">By {post.user.user_name}</p>}
+                <Stack direction="horizontal" gap={3} className="text-muted justify-content-center fst-italic mb-2 mt-4">
+                    <div>
+                        <PersonCircle className="me-1" />
+                        {post.user?.user_name || 'Anonymous'}
+                    </div>
+                    <div>
+                        <CalendarEvent className="me-1" />
+                        {new Date(post.created_at).toLocaleDateString()}
+                    </div>
+                    <div>
+                        <Folder2 className="me-1" />
+                        <Badge bg="secondary">{post.category.category_name}</Badge>
+                    </div>
+                </Stack>
             </div>
-            <div className="post-padding mt-3 mt-4">
-                <h2 className="mb-3">Category: {post.category.category_name}</h2>
-                <p className="text-justify">{post.content}</p>
-                <small className="text-center">Created {new Date(post.created_at).toLocaleDateString()}</small>
+
+            <div>
+                <p className="text-justify post-padding">{post.content}</p>
             </div>
         </div>
     );

@@ -3,5 +3,5 @@ import type { User } from "./User";
 export interface AuthContextType {
     user: User | null;
     login: (user: User) => void;
-    logout: () => void;
+    logout: () => Promise<void>;
 }

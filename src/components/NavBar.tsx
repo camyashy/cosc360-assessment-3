@@ -7,14 +7,13 @@ export default function NavBar() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
+    const handleLogout = async () => {
 
-    // Need to add some kind of functionality here to then send a message to database to log out user
-    /*const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user_name");
-        localStorage.removeItem("user_id");
-        window.location.href = "/";
-    };*/
+        if (window.confirm("Are you sure you want to log out?")) {
+            await logout();
+            navigate("/");
+        }
+    }
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -35,10 +34,7 @@ export default function NavBar() {
                         </NavDropdown>}
 
                         {user && <NavDropdown title={`${user.user_name}`} id="basic-nav-dropdown">
-                            <NavDropdown.Item onClick={async () => {
-                                await logout();
-                                navigate("/");
-                            }}>Log Out</NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleLogout}>Log Out</NavDropdown.Item>
                         </NavDropdown>}
 
                     </Nav>

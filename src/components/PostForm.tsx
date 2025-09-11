@@ -2,7 +2,7 @@ import type { Post } from "../types/Post"
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { PostsAPI } from "../api/posts";
-import { Form, Alert, Spinner } from 'react-bootstrap';
+import { Form, Alert, Card, Button, Spinner } from 'react-bootstrap';
 import type { Category } from "../types/Category";
 import { api } from "../api/http";
 
@@ -96,40 +96,45 @@ export default function PostForm({ buttonText, postData }: FormProps) {
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <Card className='mb-3'>
+            <Card.Body>
+                <form onSubmit={handleSubmit}>
 
-            {error && <Alert variant="danger" className="text-center p-3">{error}</Alert>}
+                    {error && <Alert variant="danger" className="text-center p-3">{error}</Alert>}
 
-            <div >
-                <label className="py-1 form-label">Title</label><br></br>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required
-                    className="form-control mb-3" />
-            </div>
+                    <div >
+                        <label className="py-1 form-label">Title</label><br></br>
+                        <input type="text" value={title} placeholder="Enter a title for your post" onChange={(e) => setTitle(e.target.value)} required
+                            className="form-control mb-3" />
+                    </div>
 
-            <div>
-                <Form.Group className="mb-3">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Select required value={category_id} onChange={(e) => setCategory(e.target.value)}>
-                        <option value="" disabled hidden>Please select a category</option>
-                        {allCategories?.map((cat) =>
-                            <option key={cat.category_id} value={cat.category_id}>{cat.category_name}</option>
-                        )}
-                    </Form.Select>
-                </Form.Group>
-            </div>
+                    <div>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select required value={category_id} onChange={(e) => setCategory(e.target.value)}>
+                                <option value="" disabled hidden>Please select a category</option>
+                                {allCategories?.map((cat) =>
+                                    <option key={cat.category_id} value={cat.category_id}>{cat.category_name}</option>
+                                )}
+                            </Form.Select>
+                        </Form.Group>
+                    </div>
 
-            <div>
-                <label className="form-label my-3">Content</label><br></br>
-                <textarea rows={12} value={content} onChange={(e) => setContent(e.target.value)}
-                    className="form-control mb-3" />
-            </div>
+                    <div>
+                        <label className="form-label my-3">Content</label><br></br>
+                        <textarea rows={12} placeholder="Write your post content here..." value={content} onChange={(e) => setContent(e.target.value)}
+                            className="form-control mb-3" />
+                    </div>
 
-            <div className="text-center">
-                <button type="submit" disabled={loading} className="btn bg-primary my-3">
-                    {loading ? "Saving..." : `${buttonText}`}
-                </button>
-            </div>
-        </form>
-    )
+                    <div className="text-center">
+                        <Button variant="primary" type="submit" disabled={loading} size="lg">
+                            {loading ? 'Saving...' : buttonText}
+                        </Button>
+                    </div>
+                </form>
+            </Card.Body>
+        </Card>
 
+
+    );
 }

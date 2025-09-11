@@ -10,7 +10,6 @@ import { AuthProvider } from './context/AuthContext';
 
 
 export default function App() {
-  // Do I need to add route validation here?
   return (
     <AuthProvider>
       <BrowserRouter>
