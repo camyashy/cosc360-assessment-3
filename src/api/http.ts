@@ -30,7 +30,7 @@ async function apiClient(endpoint: string, method: string, body?: any): Promise<
     }
 
     try {
-        const response = await fetch(`${API_URL}/api${endpoint}`, options);
+        const response = await fetch(`${API_URL}${endpoint}`, options);
 
         if (!response.ok) {
 

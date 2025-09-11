@@ -28,7 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logout = async () => {
 
         try {
-            await api.post("/logout", {});
+            await api.post("/api/logout", {});
 
             localStorage.removeItem("user_name");
             localStorage.removeItem("user_id");

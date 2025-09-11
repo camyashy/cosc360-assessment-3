@@ -30,7 +30,7 @@ export default function LoginPage() {
         setError(null);
 
         try {
-            const response: ApiResponse<LoginResponse> = await api.post("/login", { email, password });
+            const response: ApiResponse<LoginResponse> = await api.post("/api/login", { email, password });
 
             if (response.success) {
                 const { token, name, id } = response.data;
