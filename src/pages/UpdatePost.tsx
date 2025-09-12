@@ -7,10 +7,12 @@ import { Spinner, Alert } from 'react-bootstrap';
 
 export default function UpdatePost() {
 
+    // The ID in the URL
     const { id } = useParams<{ id: string }>() || null;
 
     const formName = "Update Post";
 
+    // Store and set the post, loading and error data
     const [post, setPost] = useState<Post | null>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -19,6 +21,7 @@ export default function UpdatePost() {
     const loggedInUserID = localStorage.getItem('user_id') || null;
     const loggedInUserName = localStorage.getItem('user_name') || "";
 
+    // Fetch the post data when the component mounts
     useEffect(() => {
         if (id) {
             const fetchPost = async () => {
@@ -41,6 +44,7 @@ export default function UpdatePost() {
         }
     }, [id]);
 
+    // If loading = true, show loading spinner
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
@@ -58,6 +62,7 @@ export default function UpdatePost() {
         )
     }
 
+    // If error occurs, show error message without loading the rest of the page
     if (error) {
         return <Alert variant="danger" className="text-center p-3">Error: {error}</Alert>;
     }

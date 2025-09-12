@@ -40,6 +40,7 @@ export default function PostDetail() {
         fetchPost();
     }, [id]); // Rerun effect if ID changes
 
+    // SHow spinner while loading
     if (loading) {
         return (
             <div className="text-center p-3 mb-2">
@@ -49,10 +50,12 @@ export default function PostDetail() {
         );
     }
 
+    // If there is an error display the message without loading the rest of the page
     if (error) {
         return <Alert variant="danger" className="text-center p-3">Error: {error}</Alert>;
     }
 
+    // If there isn't a post, display a message
     if (!post) {
         return <h2 className="bg-danger text-white p-3 mb-2 text-center">Post not found.</h2>;
     }

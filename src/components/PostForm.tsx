@@ -11,6 +11,7 @@ type FormProps = {
     postData?: Post | null;
 }
 
+// Creates a form component to either display existing post data or add new post data
 export default function PostForm({ buttonText, postData }: FormProps) {
 
     const navigate = useNavigate();
@@ -20,12 +21,15 @@ export default function PostForm({ buttonText, postData }: FormProps) {
     const [content, setContent] = useState("");
     const [category_id, setCategory] = useState("");
 
+    // Hold category data for dropdown
     const [allCategories, setAllCategories] = useState<Category[] | null>(null);
+
     //Handle loading and errors
     const [loading, setLoading] = useState(false);
     const [categoriesLoading, setCategoriesLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    // Load post content
     useEffect(() => {
         if (postData) {
             setTitle(postData.title ?? "");
@@ -33,6 +37,7 @@ export default function PostForm({ buttonText, postData }: FormProps) {
             setCategory(postData.category?.category_id ?? "");
         }
     }, [postData]);
+
     // Retrieve all categories
     useEffect(() => {
         const fetchCategories = async () => {
@@ -57,7 +62,7 @@ export default function PostForm({ buttonText, postData }: FormProps) {
 
     }, []); // Effect only runs when page loads
 
-
+    // Handle submit button functionality
     const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();
@@ -68,10 +73,14 @@ export default function PostForm({ buttonText, postData }: FormProps) {
         try {
             let success: string;
 
+            // If no existing post data
             if (!postData) {
+                // Create a new post
                 await PostsAPI.create({ title, content, category_id });
                 success = "Post created successfully!";
             } else {
+                // Post exists
+                // Update the post details
                 await PostsAPI.update(postData.id, { title, content, category_id });
                 success = "Post updated successfully!"
             }
@@ -85,6 +94,7 @@ export default function PostForm({ buttonText, postData }: FormProps) {
 
     }
 
+    // If categories are still loading, do loading image
     if (categoriesLoading) {
         return (
             <div className="text-center p-3 mb-2">

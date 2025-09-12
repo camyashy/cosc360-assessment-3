@@ -5,8 +5,6 @@ import { api } from '../api/http';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
 
@@ -19,12 +17,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }, []);
 
+    // New user login
     const login = (newUser: User) => {
         localStorage.setItem("user_name", newUser.user_name ?? "");
         localStorage.setItem("user_id", newUser.user_id ?? "");
         setUser(newUser);
     };
 
+    //User logout
     const logout = async () => {
 
         try {

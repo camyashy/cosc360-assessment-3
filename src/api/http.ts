@@ -1,6 +1,6 @@
 //const API_URL = import.meta.env.PROD ? import.meta.env.VITE_API_URL : '';
 const API_URL = import.meta.env.VITE_API_URL || '/api';
-console.log(API_URL);
+console.log("API_URL:", API_URL);
 
 function getToken(): string | null {
     return localStorage.getItem("token");
@@ -35,6 +35,7 @@ async function apiClient(endpoint: string, method: string, body?: any): Promise<
         console.log('Fetching:', `${API_URL}${endpoint}`);
         const response = await fetch(`${API_URL}${endpoint}`, options);
 
+        // If not success response
         if (!response.ok) {
 
             const errorData = await response.json();

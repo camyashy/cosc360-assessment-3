@@ -1,6 +1,7 @@
 import PostForm from '../components/PostForm';
 import { Alert } from 'react-bootstrap';
 
+// Creates a new post
 export default function CreatePost() {
 
     const formName = "Create Post";

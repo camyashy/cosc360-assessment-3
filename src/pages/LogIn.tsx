@@ -6,8 +6,6 @@ import type { ApiResponse } from '../types/Api';
 import type { LoginResponse } from '../types/LoginResponse';
 import { useAuth } from '../context/AuthContext';
 
-// Fix CSS with password/email input
-// Do I need the set username and id stuff?
 
 export default function LoginPage() {
 
@@ -22,6 +20,7 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Handle login submit button
     const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();

@@ -9,10 +9,12 @@ type TableProps = {
     onDelete: (postId: number) => void;
 }
 
+// Creates a table component to display the data for multiple posts
 export default function Table({ posts, user_id, user_name, onDelete }: TableProps) {
 
     const navigate = useNavigate();
 
+    // Handle the delete button functionality
     const handleDelete = (postId: number, e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -36,6 +38,7 @@ export default function Table({ posts, user_id, user_name, onDelete }: TableProp
                 </thead>
                 <tbody>
                     {posts?.map((post) => {
+                        {/* Returns true if admin or the author of the post */ }
                         const canEditDelete =
                             user_name === "Admin User" || user_id === String(post.user_id);
 
@@ -50,6 +53,7 @@ export default function Table({ posts, user_id, user_name, onDelete }: TableProp
 
                                     <Link to={`/post/${post.id}`} className="btn btn-success btn-sm me-1">View</Link>
 
+                                    {/* Only displays if a user is logged in */}
                                     {user_id &&
                                         <>
                                             <span title={!canEditDelete ? "You are not authorised to edit this post" : ""}>

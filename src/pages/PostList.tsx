@@ -6,6 +6,7 @@ import PostTable from '../components/PostTable';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import type { ApiResponse } from '../types/Api';
 
+// Used for both the display all posts page and display a users post page (dashboard)
 export default function PostList() {
 
     // Get the id from the URL if applicable
@@ -29,7 +30,7 @@ export default function PostList() {
 
 
     // If we are on the page of user's posts, if the user is either not logged in
-    // Or a different user, they are not allowed to access
+    // Or a different user is trying to enter, they are not allowed to access
 
     if (id) {
         if (id != loggedInUserID) {
@@ -38,7 +39,6 @@ export default function PostList() {
             )
         }
     }
-
 
     // Fetch the data when the component mounts
     useEffect(() => {

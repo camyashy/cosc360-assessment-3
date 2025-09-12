@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 
+// Footer (deployed in the layout)
 export default function Footer() {
     return (
 
