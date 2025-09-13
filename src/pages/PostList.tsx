@@ -3,7 +3,7 @@ import { Spinner, Alert, Container } from 'react-bootstrap';
 import { PostsAPI } from '../api/posts';
 import type { Post } from '../types/Post';
 import PostTable from '../components/PostTable';
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import type { ApiResponse } from '../types/Api';
 
 // Used for both the display all posts page and display a users post page (dashboard)
@@ -11,8 +11,6 @@ export default function PostList() {
 
     // Get the id from the URL if applicable
     const { id } = useParams<{ id: string }>() || null;
-
-    const navigate = useNavigate();
 
     // Determine what the heading of the page will be based upon page
     const title = id ? "Your Posts" : "All Posts";
