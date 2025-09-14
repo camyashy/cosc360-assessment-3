@@ -1,5 +1,13 @@
 https://github.com/camyashy/cosc360-assessment-3
 
+# Set Up
+Please follow the below instructions to deploy this local front end React application:
+(NB: This is based upon running the application from the supplied zipped files rather than cloning the repo from github)
+1. Navigate to the 'reactJS-client' folder in a terminal window
+2. Run ```npm run dev```
+3. Ensure the server has also been started (see instructions in server README)
+4. Navigate to the page indicated in your terminal window (Local: <page>)
+
 # Approach
 
 *Login details*<br>
